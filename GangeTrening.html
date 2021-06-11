@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <style>
+      .body{
+      background-color:RGB(235, 222, 52);
+      }
+      .gange{
+        text-align:center;
+        background-color:RGB(50, 168, 155);
+        font-size:150%;
+      }
+      
+      .poengSum{
+        background-color:RGB(245, 110, 27);
+        text-align:center;
+        font-size:300%;
+        position:relative;
+        top:-48px;
+        
+      }
+    </style>
+    
+  </head>
+  
+  <body class="body">
+    <div class="gange">
+    <h1>Vi øver på ganging!</h1>
+    <p>Vi starter med lille gangetabellen, når du har fått 10 riktige på rad øker vanskelighetsgraden, 10 nye riktige på rad og vanskelighetsgraden øker igjen, lykke til!</p>
+    
+    <p id="gangeStykke"> </p>
+    <label>Skriv svaret ditt her</label>
+    <input type="text" id="gangeSvar">
+    
+    <br><br>
+    <button type="buttong" onclick="sjekkSvar()">Kontroller svaret ditt her</button>
+    
+    </div>
+    
+    <div class="poengSum">
+      <p id="antallRiktige">Du har</p>
+    </div>
+    
+    <script>
+      var antallRiktige = 0;
+      function regneStykke(){
+        
+        var vTall =0;
+        if (antallRiktige <11) {
+          vTall = 10
+        }
+        else if (10<antallRiktige<15){
+          vTall = 15;
+          
+        }
+        else{
+          vTall = 20;
+        }
+        tallEn = Math.floor(Math.random()*vTall);
+        tallTo = Math.floor(Math.random()*vTall);
+        
+        teksten = tallEn + " &#8729; " + tallTo + " = "
+        
+        document.getElementById("gangeStykke").innerHTML = teksten;
+        document.getElementById("gangeSvar").value = null;
+      }
+      regneStykke();
+      
+      function sjekkSvar(){
+        var gittSvar = document.getElementById("gangeSvar").value;
+        var faktiskSvar = tallEn * tallTo;
+        if (gittSvar == faktiskSvar){
+          antallRiktige+=1;
+          regneStykke();
+        }
+        else{
+          antallRiktige = 0;
+          var riktigTekst = "Feil, riktige svaret var: " + faktiskSvar;
+          document.getElementById("gangeSvar").value = riktigTekst;
+          setTimeout(regneStykke,2000)
+          
+        }
+        if (antallRiktige <20){
+          poengTekst = "Du har: "+antallRiktige+" riktige."
+          document.getElementById("antallRiktige").innerHTML = poengTekst;
+        }
+        else{
+          document.getElementById("antallRiktige").innerHTML = "Hurra, du har klart over 20 riktige svar på rappen og er best! Du kan nå gi deg din gangemester :D:):D #ImDaBest";
+        }
+      }
+      poengTekst = "Du har: "+antallRiktige+" riktige."
+        document.getElementById("antallRiktige").innerHTML = poengTekst;
+      
+    </script>
+    
+  </body>
+</html>
